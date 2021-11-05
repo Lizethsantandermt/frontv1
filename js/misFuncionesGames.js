@@ -36,7 +36,7 @@ function pintarRespuestaGame(response){
     let myTable="<table>"
     myTable+="<tr>";
         myTable+="<td>Nombre</td>";
-        myTable+="<td>Modelo</td>";
+        myTable+="<td>Desarrollador</td>";
         myTable+="<td>Año</td>";
         myTable+="<td>Descripcion</td>";
         myTable+="<td>Categoria</td>";
