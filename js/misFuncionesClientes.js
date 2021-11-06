@@ -25,12 +25,41 @@ function pintarRespuesta2(respuesta){
         myTable+="<td>"+respuesta[i].name+"</td>";
         myTable+="<td>"+respuesta[i].age+"</td>";
         myTable+="<td> <button onclick=' actualizarInformacionCliente("+respuesta[i].idClient+")'>Actualizar</button>";
+        myTable+='<td><button  onclick="cargarDatosCliente(' + respuesta[i].idClient + ')">Editar Cliente!</button></td>';
         myTable+="<td> <button onclick='borrarCliente("+respuesta[i].idClient+")'>Borrar</button>";
         myTable+="</tr>";
     }
     myTable+="</table>";
     $("#resultado3").html(myTable);
 }
+
+//Capturar informacion para Actualizar
+function cargarDatosCliente(idClient) {
+    $.ajax({
+        dataType: 'JSON',
+        url:"http://129.151.121.64:8080/api/Client/"+idClient,
+        //url: "http://localhost:8080/api/Client/" + idClient,
+        type: 'GET',
+
+        success: function (respuesta) {
+            console.log(respuesta);
+            var item = respuesta;
+
+            $("#id").val(item.id);
+            $("#Clemail").val(item.email);
+            $("#Clpassword").val(item.password);
+            $("#Clage").val(item.age);
+            
+
+        },
+
+        error: function (jqXHR, textStatus, errorThrown) {
+
+        }
+    });
+}
+
+
 
 function guardarInformacionCliente(){
     let var2 = {
