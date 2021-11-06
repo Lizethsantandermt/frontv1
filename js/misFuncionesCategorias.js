@@ -19,12 +19,38 @@ function pintarRespuesta(respuesta){
         myTable+="<td>"+respuesta[i].name+"</td>";
         myTable+="<td>"+respuesta[i].description+"</td>";
         myTable+="<td> <button onclick=' actualizarInformacionCategorias("+respuesta[i].id+")'>Actualizar</button>";
+        myTable+='<td><button  onclick="cargarDatosCategoria(' + respuesta[i].id + ')">Editar Categoria!</button></td>';
         myTable+="<td> <button onclick='borrarCategoria("+respuesta[i].id+")'>Borrar</button>";
         myTable+="</tr>";
     }
     myTable+="</table>";
     $("#resultado1").html(myTable);
 }
+
+
+//Capturar informacion para Actualizar
+function cargarDatosCategoria(id) {
+    $.ajax({
+        dataType: 'JSON',
+        url:"http://129.151.121.64:8080/api/Category/"+id,
+        //url: "http://localhost:8080/api/Category/" + id,
+        type: 'GET',
+
+        success: function (respuesta) {
+            console.log(respuesta);
+            var item = respuesta;
+
+            $("#id").val(item.id);
+            $("#Cname").val(item.name);
+            $("#Cdescription").val(item.description);
+                   },
+
+        error: function (jqXHR, textStatus, errorThrown) {
+
+        }
+    });
+}
+
 
 function guardarInformacionCategorias(){
    
